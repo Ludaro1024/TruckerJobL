@@ -66,8 +66,9 @@ function truckjob()
 			ESX.TriggerServerCallback('truckerjob:xp', function(xp)
 				if Config.Debug then
 			print(v.EXP)
+			print(xp)
 				end
-			if xp > v.EXP then
+			if xp >= v.EXP then
 				ESX.Game.SpawnVehicle(v.V, v.S, v.SH, function (vehicle)
 					if Config.Debug then
 					print(v.T)
@@ -223,7 +224,7 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 					end
 			TriggerServerEvent("truckjob:receivemoney", reward)
 			if Config.SNZNotify then
-					exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['reward'] .. reward .. Config.Currency, 5100, 'fas fa-inbox')
+					exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['reward'] .. reward .. Config.Currency, 51000, 'fas fa-inbox')
 					elseif Config.CustomNotify then
 						notify(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['reward'] .. reward .. Config.Currency)
 					else
@@ -233,7 +234,7 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 			RemoveBlip(endblip)
 				SetBlipRoute(endblip, false)
 				if Config.SNZNotify then
-					exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['finished'], 5100, 'fas fa-inbox')
+					exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['finished'], 5000, 'fas fa-inbox')
 					elseif Config.CustomNotify then
 						notify(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['finished'])
 					else

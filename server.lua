@@ -45,7 +45,6 @@ if difficulty == "easy" then
   -- print("normal")
 elseif difficulty == "hard" then
 truckerexp = truckerexp + Config.Hardreward
-TriggerClientEvent("money" (t))
  -- -- print("hard")
 end
 local ssource = source
