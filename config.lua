@@ -30,7 +30,9 @@ Config.MYSQL = 'mysql-async'    --Either mysql-async or oxmysql
 -- PLEASE EDIT R i didnt do it because of balancing
 Config.Jobs = {
     -- J = Jobname (Name of the Mission) -- D = "easy" "normal" "hard" (difficulty) EXP = Required eXP S = starting coordinates (Truck) SH = Heading (Truck)  F = Finishing Coordinates V = Vehicle T= Trailer TT= Trailer Spawn, TH = Trailer Heading, R = Reward ($)-- 
-    {J = "Bringe Holz vom Hafen zum Sägewerk", D = "hard", EXP = 200, S = vector3(1243.8436, -3298.6514, 5.6375), SH = 278.9662, F = vector3(420, 420, 420), V = "hauler", T = "TR2", TT = vector3(1288.6229, -3312.3245, 5.9719), TH = 87.5498, R = 1},
+    {J = "Bringe Holz vom Hafen zum Sägewerk", D = "hard", EXP = 200, S = vector3(-556.9644, 5379.0376, 70.0815, 78.6428), SH = 278.9662, F = vector3(-556.9644, 5379.0376, 70.0815), V = "hauler", T = "TrailerLogs", TT = vector3(1288.6229, -3312.3245, 5.9719), TH = 87.5498, R = 1},
+    {J = "Bringe Weizen vom Hafen zur Farm", D = "normal", EXP = 100, S = vector3(-556.9644, 5379.0376, 70.0815, 78.6428), SH = 278.9662, F = vector3(1525.6123, 1719.6370, 109.9840), V = "hauler", T = "BaleTrailer", TT = vector3(1288.6229, -3312.3245, 5.9719), TH = 87.5498, R = 1},
+    {J = "Bringe Autos zum Autohaus", D = "easy", EXP = 0, S = vector3(-556.9644, 5379.0376, 70.0815, 78.6428), SH = 278.9662, F = vector3(420, 420, 420), V = "hauler", T = "TR4", TT = vector3(-33.2286, -1079.4414, 27.0418), TH = 87.5498, R = 1},
 }
 
 --Config.Easy.reward =
