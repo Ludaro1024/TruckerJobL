@@ -1,3 +1,16 @@
+if Config.UseOldESX then
+    Citizen.CreateThread(function()
+        ESX = nil
+        
+        while ESX == nil do
+            TriggerEvent(Config.ESXEvent, function(obj) ESX = obj end)
+            Citizen.Wait(0)
+        end
+    end)
+end
+  
+
+
 _menuPool = NativeUI.CreatePool()
 local injob = false
 local trailerneeded = true
@@ -34,6 +47,7 @@ end)
 local truckerjobs
  
 function openMenu() 
+	local injob = false
 	mainmenu = NativeUI.CreateMenu(Translation[Config.Locale]['MainMenuname'], Translation[Config.Locale]['MainMenuDesc'])
 	_menuPool:Add(mainmenu)
 	_menuPool:RefreshIndex()
@@ -46,29 +60,66 @@ function openMenu()
 	mainmenu:AddItem(TruckerJobs)
 	TruckerJobs.Activated = function(sender,index)
 		mainmenu:Visible(false)
-		truckjob()
-		truckerjobs:Visible(true)
-	end
+		ESX.TriggerServerCallback('truckerjob:xp', function(xp)
+		truckjob(xp)
+		end)
+end
 end
 
-function truckjob()
+function truckjob(xp)
+	local exp = NativeUI.CreateItem("deine EXP:" .. xp, "")
 	truckerjobs = NativeUI.CreateMenu(Translation[Config.Locale]['JobsMenuName'], Translation[Config.Locale]['JobsMenuDesc'])
 	_menuPool:Add(truckerjobs)
 	_menuPool:RefreshIndex()
-	_menuPool:MouseControlsEnabled (false)
-	_menuPool:MouseEdgeEnabled (false)
+	_menuPool:MouseControlsEnabled(false)
+	_menuPool:MouseEdgeEnabled(false)
 	_menuPool:ControlDisablingEnabled(false)
-	truckerjobs:Visible(true)
+	truckerjobs:AddItem(exp)
+	if not injob then
+		truckerjobs:Visible(true)
+		if Config.Debug then
+		print(injob)
+		end
+		else
+			if Config.Debug then
+			print("ye")
+			print(injob)
+			end
+			if Config.SNZNotify then
+				exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['not_allowed_in_job'], 5000, 'fas fa-inbox')
+				elseif Config.CustomNotify then
+					notify(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['not_allowed_in_job'])
+				else
+					ESX.ShowNotification(Translation[Config.Locale]['not_allowed_in_job'])
+				end
+		end
 	for k, v in pairs(Config.Jobs) do
-		local Jobs = NativeUI.CreateItem(v.J, nil)
+		if v.EXP ~= nil then
+			if Config.Debug then
+				print(v.EXP)
+			end
+		local Jobs = NativeUI.CreateItem(v.J, "Benötigte EXP:" .. v.EXP)
 		truckerjobs:AddItem(Jobs)
+		ESX.TriggerServerCallback('truckerjob:xp', function(xp)
+			 if Config.Debug then print(xp) end
+			if xp <= v.EXP then
+				if Config.Debug then
+					print(xp)
+				print(v.EXP) 
+			end
+		Jobs:Enabled(false)
+			end
+		end)
 		Jobs.Activated = function(sender,index)
+
 			ESX.TriggerServerCallback('truckerjob:xp', function(xp)
 				if Config.Debug then
 			print(v.EXP)
 			print(xp)
 				end
-			if xp >= v.EXP then
+		if xp >= v.EXP then
+			injob = true
+			print("hä?")
 				ESX.Game.SpawnVehicle(v.V, v.S, v.SH, function (vehicle)
 					if Config.Debug then
 					print(v.T)
@@ -84,7 +135,10 @@ function truckjob()
 			 SetBlipRoute(finish, true)
 			end)
 			injob = true
+			if Config.Debug then
 			print(injob)
+			end
+			SetNewWaypoint(v.S.x, v.S.y)
 			if Config.SNZNotify then
 				exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['spawned'], 5000, 'fas fa-inbox')
 				elseif Config.CustomNotify then
@@ -92,22 +146,14 @@ function truckjob()
 				else
 					ESX.ShowNotification(Translation[Config.Locale]['spawned'])
 				end
-				truckerjobs:Visible(false)
 				if Config.Debug then
 				print(v.F)
 				end
 			check(v.F, finish, vehicle, trailer, v.S, v.D, v.R)
 				end)
-			else
-				if Config.SNZNotify then
-					exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['not_allowed'], 5000, 'fas fa-inbox')
-					elseif Config.CustomNotify then
-						notify(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['not_allowed'])
-					else
-						ESX.ShowNotification(Translation[Config.Locale]['not_allowed'])
-					end
 			end
 		end)
+		end
 		end
 	end
 end
@@ -164,6 +210,7 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 				local playerveh = GetVehiclePedIsIn(PlayerPedId())
 				DeleteVehicle(playerveh)
 				missionfailed = true
+				injob = false
 				if Config.Debug then
 				print(missionfailed)
 				end
@@ -182,8 +229,9 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 
 		Citizen.CreateThread(function()
 			while true do
-				Citizen.Wait(5000)
+				Citizen.Wait(2000)
 				if injob then
+					truckerjobs:Visible(false)
 					if Config.Debug then
 						print("injob yay! checking if trailer works")
 					end
@@ -257,3 +305,5 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 -- 200
 
 -- 400
+
+
