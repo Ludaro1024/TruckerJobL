@@ -11,6 +11,8 @@ end
   
 
 
+
+
 _menuPool = NativeUI.CreatePool()
 local injob = false
 local trailerneeded = true
@@ -56,18 +58,59 @@ function openMenu()
 	_menuPool:ControlDisablingEnabled(false)
 	mainmenu:Visible(true)
 	local TruckerJobs = NativeUI.CreateItem(Translation[Config.Locale]['JobsItemName'], Translation[Config.Locale]['JobsItemDesc'])
---	local TruckerJobs = NativeUI.CreateItem("", "lol")
+	local Truckk = NativeUI.CreateItem(Translation[Config.Locale]['TruckItemName'], Translation[Config.Locale]['TruckItemDesc'])
 	mainmenu:AddItem(TruckerJobs)
+	mainmenu:AddItem(Truckk)
+	
+	Truckk.Activated = function(sender,index)
+		if Config.Buyabletrucks then
+		mainmenu:Visible(false)
+		truckbuymenu()
+		print("2")
+		else
+			Truck:Enabled(false)
+		end
+	end
 	TruckerJobs.Activated = function(sender,index)
 		mainmenu:Visible(false)
 		ESX.TriggerServerCallback('truckerjob:xp', function(xp)
 		truckjob(xp)
 		end)
 end
+
+
+end
+
+function truckbuymenu()
+	--print("function")
+		truckerjobs = NativeUI.CreateMenu(Translation[Config.Locale]['JobsMenuName'], Translation[Config.Locale]['JobsMenuDesc'])
+		local del = NativeUI.CreateItem(Translation[Config.Locale]['Sold'], " ")
+		_menuPool:Add(truckerjobs)
+		_menuPool:RefreshIndex()
+		_menuPool:MouseControlsEnabled(false)
+		_menuPool:MouseEdgeEnabled(false)
+		_menuPool:ControlDisablingEnabled(false)
+		truckerjobs:Visible(true)
+for k, v in pairs(Config.Trucks) do
+	local Truck = NativeUI.CreateItem(v.label, Translation[Config.Locale]['price'] .. " " .. v.price)
+	truckerjobs:AddItem(Truck)
+	ESX.TriggerServerCallback("truckerjob:truck", function(truck) 
+		if truck == v.spawnname then
+			Truck:Enabled(false)
+		end
+	end)
+	Truck.Activated = function(sender,index)
+TriggerServerEvent("truckjob:buytruck", v.spawnname, v.price, source)
+end
+end
+truckerjobs:AddItem(del)
+del.Activated = function(sender,index)
+	TriggerServerEvent("truckjob:deletetruck")
+end
 end
 
 function truckjob(xp)
-	local exp = NativeUI.CreateItem("deine EXP:" .. xp, "")
+	local exp = NativeUI.CreateItem(Translation[Config.Locale]['yourxp'] .. " " .. xp, "")
 	truckerjobs = NativeUI.CreateMenu(Translation[Config.Locale]['JobsMenuName'], Translation[Config.Locale]['JobsMenuDesc'])
 	_menuPool:Add(truckerjobs)
 	_menuPool:RefreshIndex()
@@ -75,6 +118,8 @@ function truckjob(xp)
 	_menuPool:MouseEdgeEnabled(false)
 	_menuPool:ControlDisablingEnabled(false)
 	truckerjobs:AddItem(exp)
+	exp:Enabled(false)
+	
 	if not injob then
 		truckerjobs:Visible(true)
 		if Config.Debug then
@@ -119,7 +164,32 @@ function truckjob(xp)
 				end
 		if xp >= v.EXP then
 			injob = true
+			if Config.Debug then
 			print("hä?")
+		end
+		if Config.Debug then
+			print(v.V)
+			print(v.S)
+			print(v.SH)
+			print(v.S.x)
+			print(v.S.y)
+			print(v.S.z)
+			end
+
+			ESX.TriggerServerCallback('truckerjob:truck', function(truck)
+				if truck ~= nil then
+					ESX.Game.SpawnVehicle(truck, v.S, v.SH, function (vehicle)
+						if Config.Debug then
+						print(v.T)
+						print(v.S)
+						print(v.SH)
+						print(v.S.x)
+						print(v.S.y)
+						print(v.S.z)
+						print(vehicle)
+						end
+					end)
+					else
 				ESX.Game.SpawnVehicle(v.V, v.S, v.SH, function (vehicle)
 					if Config.Debug then
 					print(v.T)
@@ -129,6 +199,10 @@ function truckjob(xp)
 					print(v.S.y)
 					print(v.S.z)
 					end
+				end)
+			end
+			end)
+					
 			ESX.Game.SpawnVehicle(v.T, v.TT, v.TH, function (trailer)
 			 local finish = AddBlipForCoord(v.F.x, v.F.y, v.F.z)
 			 SetBlipColour(finish, Config.BlipColor)
@@ -150,13 +224,37 @@ function truckjob(xp)
 				print(v.F)
 				end
 			check(v.F, finish, vehicle, trailer, v.S, v.D, v.R)
-				end)
 			end
 		end)
 		end
 		end
 	end
 end
+
+--[[
+RegisterNetEvent('truckjob:truckbought')
+AddEventHandler('truckjob:truckbought', function(truck)
+	if Config.SNZNotify then
+		exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'],Translation[Config.Locale]['TruckBought'] .. " " .. truck .. Translation[Config.Locale]['TruckBought2']  .. price, 5000, 'fas fa-inbox')
+		elseif Config.CustomNotify then
+			notify(Translation[Config.Locale]['truckername'],Translation[Config.Locale]['TruckBought'] .. " " .. truck .. Translation[Config.Locale]['TruckBought2']  .. price)
+		else
+			ESX.ShowNotification(Translation[Config.Locale]['TruckBought'] .. " " .. truck .. Translation[Config.Locale]['TruckBought2']  .. price)
+		end
+end)
+
+
+RegisterNetEvent('truckjob:truckboughtnotenoughmoney')
+AddEventHandler('truckjob:truckboughtnotenoughmoney', function(source)
+	if Config.SNZNotify then
+		exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['NotEnoughMoney'], 5000, 'fas fa-inbox')
+		elseif Config.CustomNotify then
+			notify(Translation[Config.Locale]['truckername'],Translation[Config.Locale]['NotEnoughMoney'])
+		else
+			ESX.ShowNotification(Translation[Config.Locale]['NotEnoughMoney'])
+		end
+end)
+]]
 
 function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, reward)
 	local checkpoint = false
@@ -229,16 +327,16 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 
 		Citizen.CreateThread(function()
 			while true do
-				Citizen.Wait(2000)
+				Citizen.Wait(50)
 				if injob then
 					truckerjobs:Visible(false)
-					if Config.Debug then
+					if Config.Debug and Config.Spam then
 						print("injob yay! checking if trailer works")
 					end
 					if IsPedInAnyVehicle(PlayerPedId(), false) then
 						local veh = GetVehiclePedIsIn(PlayerPedId())
 						if not IsVehicleAttachedToTrailer(veh) and trailerneeded then
-							if Config.Debug then
+							if Config.Debug and Config.Spam then
 							print(trailerneeded)
 							end
 							if Config.SNZNotify then
@@ -278,6 +376,13 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 					else
 						ESX.ShowNotification(Translation[Config.Locale]['reward'] .. reward .. Config.Currency)
 					end
+					if Config.SNZNotify then
+						exports['SNZ_UI']:AddNotification(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['Lease'] .. Config.LeasePrice .. Config.Currency, 51000, 'fas fa-inbox')
+						elseif Config.CustomNotify then
+							notify(Translation[Config.Locale]['truckername'], Translation[Config.Locale]['Lease'] .. Config.LeasePrice .. Config.Currency)
+						else
+							ESX.ShowNotification(Translation[Config.Locale]['Lease'] .. Config.LeasePrice .. Config.Currency)
+						end
 			local pedCoord = GetEntityCoords(PlayerPedId())
 			RemoveBlip(endblip)
 				SetBlipRoute(endblip, false)
@@ -288,10 +393,12 @@ function check(finishcoords, finish, vehicle, trailer, endpos, difficulty, rewar
 					else
 						ESX.ShowNotification(Translation[Config.Locale]['finished'])
 					end
-				ESX.TriggerServerCallback('truckerjob:xp', function(xp, difficulty, reward)
+				ESX.TriggerServerCallback('truckerjob:xp', function(xp, difficulty, reward, donee)
 				end)
 				
 				local pedCoord = GetEntityCoords(PlayerPedId())
+				local pvehicle = GetVehiclePedIsIn(PlayerPedId())
+				ESX.Game.DeleteVehicle(pvehicle)
 				ESX.Game.DeleteVehicle(vehicle)
 				ESX.Game.DeleteObject(trailer)
 				RemoveBlip(endblip)

@@ -4,7 +4,7 @@ game 'gta5'
 name "Trucker job"
 author 'Sukra, Ludaro'
 description 'Trucker Job for esx'
-version '1.0'
+version '3.0'
 
 shared_scripts {
 	'config.lua',
