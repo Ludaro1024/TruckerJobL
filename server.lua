@@ -56,7 +56,7 @@ AddEventHandler('truckjob:buytruck', function(truck, price)
   MySQL.Async.execute('UPDATE users SET truck = @truck WHERE identifier = @identifier', {
   ['@identifier'] = xPlayer.identifier,
   ['@truck'] = truck,
-},function()
+},function(result)
 end)
 else
 
@@ -71,8 +71,6 @@ else
 
 end
 else
- 
-cb(nil)
  end)
 
 
