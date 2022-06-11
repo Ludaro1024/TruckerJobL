@@ -1,10 +1,14 @@
 if Config.UseOldESX then
-    local ESX = nil
-
-    TriggerEvent(Config.ESXEvent, function(obj) 
-        ESX = obj 
+    Citizen.CreateThread(function()
+        ESX = nil
+        
+        while ESX == nil do
+            TriggerEvent(Config.ESXEvent, function(obj) ESX = obj end)
+            Citizen.Wait(0)
+        end
     end)
 end
+
 local jobdonee = false
 RegisterNetEvent('truckjob:receivemoney')
 AddEventHandler('truckjob:receivemoney', function(reward)
