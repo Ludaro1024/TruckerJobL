@@ -20,5 +20,9 @@ Planed for the future is:
 - Hiring Workers that work for you
 - Specialized-Work
 - Turning it into a NUI instead of NativeUI
-- 
-if u have any suggesstions dm me on discord: ludaro <3#9962
+- Making the Selling work (selling your own truck and not selling all of them for the same $)
+
+
+if u have any suggestions or problems, i would advise u to create an issue here in github,
+
+if u need anything else u can contact me on Discord: ludaro <3#9962
