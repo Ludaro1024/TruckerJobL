@@ -52,7 +52,7 @@ Config.Jobs = {
 --Config.Hard.reward =
 
 
-Config.Locale = "de"
+Config.Locale = "en"
 
 Translation = {
     ['de'] = {
