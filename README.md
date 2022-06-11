@@ -21,6 +21,7 @@ Planed for the future is:
 - Specialized-Work
 - Turning it into a NUI instead of NativeUI
 - Making the Selling work (selling your own truck and not selling all of them for the same $)
+- Removing the Cars if restart or stuff :D
 
 
 if u have any suggestions or problems, i would advise u to create an issue here in github,
