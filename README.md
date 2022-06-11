@@ -28,3 +28,6 @@ Planed for the future is:
 if u have any suggestions or problems, i would advise u to create an issue here in github,
 
 if u need anything else u can contact me on Discord: ludaro <3#9962
+
+
+UPDATE: if u have downloaded the script before the 11.06.2022 (13:00) then run the update.sql :)
