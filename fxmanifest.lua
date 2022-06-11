@@ -7,8 +7,7 @@ description 'Trucker Job for esx'
 version '3.0'
 
 shared_scripts {
-	'config.lua',
-    '@es_extended/imports.lua'
+'config.lua'
 }
 
 client_scripts {
