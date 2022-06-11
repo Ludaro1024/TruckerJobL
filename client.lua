@@ -1,3 +1,5 @@
+
+
 if Config.UseOldESX then
     Citizen.CreateThread(function()
         ESX = nil
@@ -177,7 +179,7 @@ function truckjob(xp)
 			end
 
 			ESX.TriggerServerCallback('truckerjob:truck', function(truck)
-				if truck ~= nil then
+				if truck ~= nil and v.CTA then
 					ESX.Game.SpawnVehicle(truck, v.S, v.SH, function (vehicle)
 						if Config.Debug then
 						print(v.T)
