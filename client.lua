@@ -68,7 +68,7 @@ function openMenu()
 		if Config.Buyabletrucks then
 		mainmenu:Visible(false)
 		truckbuymenu()
-		print("2")
+
 		else
 			Truck:Enabled(false)
 		end
@@ -85,7 +85,7 @@ end
 
 function truckbuymenu()
 	--print("function")
-		truckerjobs = NativeUI.CreateMenu(Translation[Config.Locale]['JobsMenuName'], Translation[Config.Locale]['JobsMenuDesc'])
+		truckerjobs = NativeUI.CreateMenu(Translation[Config.Locale]['TruckItemName'], Translation[Config.Locale]['TruckItemDesc'])
 		local del = NativeUI.CreateItem(Translation[Config.Locale]['Sold'], " ")
 		_menuPool:Add(truckerjobs)
 		_menuPool:RefreshIndex()
@@ -103,11 +103,13 @@ for k, v in pairs(Config.Trucks) do
 	end)
 	Truck.Activated = function(sender,index)
 TriggerServerEvent("truckjob:buytruck", v.spawnname, v.price, source)
+Truck:Enabled(false)
 end
 end
 truckerjobs:AddItem(del)
 del.Activated = function(sender,index)
 	TriggerServerEvent("truckjob:deletetruck")
+	truckerjobs:Visible(false)
 end
 end
 
@@ -145,7 +147,7 @@ function truckjob(xp)
 			if Config.Debug then
 				print(v.EXP)
 			end
-		local Jobs = NativeUI.CreateItem(v.J, "Benötigte EXP:" .. v.EXP)
+		local Jobs = NativeUI.CreateItem(v.J,Translation[Config.Locale]['neededexp'].. v.EXP)
 		truckerjobs:AddItem(Jobs)
 		ESX.TriggerServerCallback('truckerjob:xp', function(xp)
 			 if Config.Debug then print(xp) end

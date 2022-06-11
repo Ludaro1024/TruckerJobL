@@ -1,6 +1,6 @@
 Config = {}
 Translation = {}
-Config.Debug = true
+Config.Debug = false
 Config.Spam = false
 
 -- Blip Stuff --
@@ -43,7 +43,7 @@ Config.Jobs = {
     -- if NOTHING HAPPENS WHEN SELECTING THE JOB, BE SURE U INPUT RIGHT SPAWNNAME
     {J = "Bring wood to the Lumberjack", D = "hard", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 204.0312, F = vector3(-556.9644, 5379.0376, 70.0815), V = "hauler", T = "TrailerLogs", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = true},
     {J = "Bring wheat to the farm", D = "normal", EXP = 0, S = vector3(1431.6553, 1079.4452, 114.2438), SH = 263.26065, F = vector3(1525.6123, 1719.6370, 109.9840), V = "tractor2", T = "baletrailer", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = false},
-    {J = "Bring cars to the Car-Shop", D = "easy", EXP = 0, S = vector3(-33.8269, -1078.9248, 27.0375), SH = 263.26065, F = vector3(420, 420, 420), V = "hauler", T = "TR4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = true},
+    {J = "Bring cars to the Car-Shop", D = "easy", EXP = 0, S = vector3(1431.6553, 1079.4452, 114.2438), SH = 263.26065, F = vector3(-30.6471, -1082.4329, 27.0418), V = "hauler", T = "TR4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = true},
 
 }
 
@@ -77,7 +77,8 @@ Translation = {
         ['yourxp'] = 'Deine EXP:',
         ['reward'] = 'Du hast dein Gehalt Erhalten:',
         ['Lease'] = "Dir wurde für den Truck der dir geliehen wurde soviel abgezogen:",
-        ['Sold'] = "Dein Truck wurde Der firma wieder gutgeschrieben",
+        ['Sold'] = "Truck Firma Wieder gutschreiben",
+        ['neededexp'] = "Beötigte EXP für den Job:",
     },
     ['en'] = {
         ['MainMenuname'] = 'Trucker-Job',
@@ -101,6 +102,7 @@ Translation = {
         ['yourxp'] = 'Your EXP:',
         ['reward'] = 'You got your loan for the job:',
         ['Lease'] = "You Leased the truck and got charged for it :",
-        ['Sold'] = "Your Truck has been given back to the company",
+        ['Sold'] = "Give Truck Back to Company",
+        ['neededexp'] = "Needed EXP for the Job:",
     }
 }
