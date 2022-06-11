@@ -1,15 +1,11 @@
-
-
-if Config.UseOldESX then
-    Citizen.CreateThread(function()
+Citizen.CreateThread(function()
         ESX = nil
         
         while ESX == nil do
             TriggerEvent(Config.ESXEvent, function(obj) ESX = obj end)
             Citizen.Wait(0)
         end
-    end)
-end
+end)
   
 
 
