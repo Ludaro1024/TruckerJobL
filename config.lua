@@ -41,9 +41,9 @@ Config.MYSQL = 'mysql-async'    --Either mysql-async or oxmysql
 Config.Jobs = {
     -- J = Jobname (Name of the Mission) -- D = "easy" "normal" "hard" (difficulty) EXP = Required eXP S = starting coordinates (Truck) SH = Heading (Truck)  F = Finishing Coordinates V = Vehicle T= Trailer TT= Trailer Spawn, TH = Trailer Heading, R = Reward ($)-- 
     -- if NOTHING HAPPENS WHEN SELECTING THE JOB, BE SURE U INPUT RIGHT SPAWNNAME
-    {J = "Bringe Holz vom Hafen zum Sägewerk", D = "hard", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 204.0312, F = vector3(-556.9644, 5379.0376, 70.0815), V = "hauler", T = "TrailerLogs", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1},
-    {J = "Bringe Weizen vom Hafen zur Farm", D = "normal", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 263.26065, F = vector3(1525.6123, 1719.6370, 109.9840), V = "hauler", T = "tr4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1},
-    {J = "Bringe Autos zum Autohaus", D = "easy", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 263.26065, F = vector3(420, 420, 420), V = "hauler", T = "TR4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1},
+    {J = "Bring wood to the Lumberjack", D = "hard", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 204.0312, F = vector3(-556.9644, 5379.0376, 70.0815), V = "hauler", T = "TrailerLogs", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1},
+    {J = "Bring wheat to the farm", D = "normal", EXP = 0, S = vector3(1431.6553, 1079.4452, 114.2438), SH = 263.26065, F = vector3(1525.6123, 1719.6370, 109.9840), V = "hauler", T = "tr4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1},
+    {J = "Bring cars to the Car-Shop", D = "easy", EXP = 0, S = vector3(-33.8269, -1078.9248, 27.0375), SH = 263.26065, F = vector3(420, 420, 420), V = "hauler", T = "TR4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1},
 
 }
 
