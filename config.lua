@@ -32,9 +32,6 @@ Config.Trucks = {
 Config.Easyreward = 100
 Config.Normalreward = 200
 Config.Hardreward = 300
-
-
-Config.UseOldESX = true        --Enable this if you use Any Esx Version between 1.2 and V1 Final, This Script will not work with Esx 1.1
 Config.ESXEvent = 'esx:getSharedObject'     --Leave this alone if you don't know what you are doing ^^ only relevant if the above setting is true
 Config.MYSQL = 'mysql-async'    --Either mysql-async or oxmysql
 -- PLEASE EDIT R i didnt do it because of balancing
@@ -42,8 +39,8 @@ Config.Jobs = {
     -- J = Jobname (Name of the Mission) -- D = "easy" "normal" "hard" (difficulty) EXP = Required eXP S = starting coordinates (Truck) SH = Heading (Truck)  F = Finishing Coordinates V = Vehicle T= Trailer TT= Trailer Spawn, TH = Trailer Heading, R = Reward ($) CTA = Custom Truck Allowed?-- 
     -- if NOTHING HAPPENS WHEN SELECTING THE JOB, BE SURE U INPUT RIGHT SPAWNNAME
     {J = "Bring wood to the Lumberjack", D = "hard", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 204.0312, F = vector3(-556.9644, 5379.0376, 70.0815), V = "hauler", T = "TrailerLogs", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = true},
-    {J = "Bring wheat to the farm", D = "normal", EXP = 0, S = vector3(1431.6553, 1079.4452, 114.2438), SH = 263.26065, F = vector3(1525.6123, 1719.6370, 109.9840), V = "tractor2", T = "baletrailer", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = false},
-    {J = "Bring cars to the Car-Shop", D = "easy", EXP = 0, S = vector3(1431.6553, 1079.4452, 114.2438), SH = 263.26065, F = vector3(-30.6471, -1082.4329, 27.0418), V = "hauler", T = "TR4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = true},
+    {J = "Bring wheat to the farm", D = "normal", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 263.26065, F = vector3(1525.6123, 1719.6370, 109.9840), V = "tractor2", T = "baletrailer", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = false},
+    {J = "Bring cars to the Car-Shop", D = "easy", EXP = 0, S = vector3(1248.1285, -3298.5332, 5.8972), SH = 263.26065, F = vector3(-30.6471, -1082.4329, 27.0418), V = "hauler", T = "TR4", TT = vector3(1284.8077, -3317.3938, 5.9031), TH = 79.9587, R = 1, CTA = true},
 
 }
 
