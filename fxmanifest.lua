@@ -7,16 +7,13 @@ description 'Trucker Job for esx'
 version '3.0'
 
 shared_scripts {
-'config.lua'
+	'config.lua'
 }
 
 client_scripts {
-	'@NativeUILua_Reloaded/src/NativeUIReloaded.lua',
-    '@NativeUI/NativeUI.lua',
 	'client.lua'
 }
 
 server_scripts {
-	'server.lua',
-	'@mysql-async/lib/MySQL.lua'
+	'server.lua'
 }
