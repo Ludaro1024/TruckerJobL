@@ -147,7 +147,7 @@ function truckjob(xp)
 		truckerjobs:AddItem(Jobs)
 		ESX.TriggerServerCallback('truckerjob:xp', function(xp)
 			 if Config.Debug then print(xp) end
-			if xp <= v.EXP then
+				if xp >= v.EXP then
 				if Config.Debug then
 					print(xp)
 				print(v.EXP) 
