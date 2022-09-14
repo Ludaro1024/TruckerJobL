@@ -13,11 +13,11 @@ shared_scripts {
 
 client_scripts {
 	'@NativeUILua_Reloaded/src/NativeUIReloaded.lua',
-    '@NativeUI/NativeUI.lua',
+    	'@NativeUI/NativeUI.lua',
 	'client.lua'
 }
 
 server_scripts {
-	'server.lua',
 	'@mysql-async/lib/MySQL.lua'
+	'server.lua',
 }
